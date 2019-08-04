@@ -13,6 +13,11 @@ import RedButton from '../components/RedButton';
 import SecurityNotice from '../components/SecurityNotice';
 
 export default class CheckRegistrationScreen extends React.Component {
+  constructor(props) {
+    super(props)
+    //console.log(props.container);
+  }
+
   render() {
     return (
       <View style={styles.container}>

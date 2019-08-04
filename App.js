@@ -10,12 +10,22 @@ import { Provider, Subscribe } from 'unstated';
 import { Button } from 'react-native-elements';
 
 import UserContainer from './app/lib/UserContainer';
+import LandingPageScreen from './app/screens/LandingPage';
 import HomeScreen from './app/screens/Home';
 import CheckRegistrationScreen from './app/screens/CheckRegistration';
-import { Style } from './app/config/styles';
 
 
 const Stack = createStackNavigator({
+  LandingPage: {
+    screen: (props) => (
+      <Subscribe to={[UserContainer]}>
+        {container => (<LandingPageScreen {...props} container={container} />)}
+      </Subscribe>
+    ),
+    navigationOptions: {
+      header: null
+    }
+  },
   Home: {
     screen: (props) => (
       <Subscribe to={[UserContainer]}>

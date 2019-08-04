@@ -31,8 +31,8 @@ export default class UserContainer extends Container {
         registered: false,
         lastRegistrationCheck: null,
         token: null,
-        address: {formattedAddress: ""},
-        friends: []
+        zipcode: null,
+        birthyear: null,
       }
       await Lib.Storage.set('USER', user);
     }
