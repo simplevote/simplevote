@@ -12,7 +12,30 @@ import { Style } from '../config/styles';
 export default class CheckRegistrationForm extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props);
+  }
+  // add handlers for each form value to set the user's state
+  handleEndFirstName = (value) => {
+    let { user } = this.props.container.state
+    user.firstName = value
+    this.props.container.setState({user})
+  }
+
+  handleEndLastName = (value) => {
+    let { user } = this.props.container.state
+    user.lastName = value
+    this.props.container.setState({user})
+  }
+
+  handleEndZipcode = (value) => {
+    let { user } = this.props.container.state
+    user.zipcode = value
+    this.props.container.setState({user})
+  }
+
+  handleEndBirthyear = (value) => {
+    let { user } = this.props.container.state
+    user.birthyear = value
+    this.props.container.setState({user})
   }
 
   render() {
@@ -28,21 +51,25 @@ export default class CheckRegistrationForm extends React.Component {
 
         <FloatingLabel
           style={[Style.forms.container, Style.forms.inputContainer]}
+          onChangeText={this.handleEndFirstName}
           inputStyle={Style.forms.input}
           labelStyle={Style.forms.input}
         >Legal first name</FloatingLabel>
         <FloatingLabel
           style={[Style.forms.container, Style.forms.inputContainer]}
+          onChangeText={this.handleEndLastName}
           inputStyle={Style.forms.input}
           labelStyle={Style.forms.input}
         >Legal last name</FloatingLabel>
         <FloatingLabel
           style={[Style.forms.container, Style.forms.inputContainer]}
+          onChangeText={this.handleEndZipcode}
           inputStyle={Style.forms.input}
           labelStyle={Style.forms.input}
         >Zipcode</FloatingLabel>
         <FloatingLabel
           style={[Style.forms.container, Style.forms.inputContainer]}
+          onChangeText={this.handleEndBirthyear}
           inputStyle={Style.forms.input}
           labelStyle={Style.forms.input}
         >Birthyear</FloatingLabel>

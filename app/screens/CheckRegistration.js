@@ -15,16 +15,17 @@ import SecurityNotice from '../components/SecurityNotice';
 export default class CheckRegistrationScreen extends React.Component {
   constructor(props) {
     super(props)
-    //console.log(props.container);
   }
 
   render() {
+    let disabled = !this.props.container.hasBasicInfo();
     return (
       <View style={styles.container}>
         <CheckRegistrationHeader />
-        <CheckRegistrationForm />
+        <CheckRegistrationForm container={this.props.container} />
         <RedButton
           navigation={this.props.navigation}
+          disabled={disabled}
           text={"Submit"}
         />
         <SecurityNotice />

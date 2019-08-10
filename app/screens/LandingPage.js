@@ -53,7 +53,7 @@ export default class LandingPageScreen extends React.Component {
 
   _cacheResources = async () => {
     const images = [
-      require('../../assets/blue_large.png'),
+      // require('../../assets/blue_large.png'),
     ];
     const cacheImages = images.map(image => Asset.fromModule(image).downloadAsync());
     return Promise.all(cacheImages)

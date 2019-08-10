@@ -16,8 +16,31 @@ export default class UserContainer extends Container {
   state = {
     loading: true,
     today: moment().startOf('day'),
-    user: {election: {hasElection: false, name: "No upcoming elections"}},
+    user: {
+      id: null,
+      createdAt: null,
+      registered: false,
+      firstName: null,
+      lastName: null,
+      zipcode: null,
+      birthyear: null,
+      hasBasicInfo: null
+    },
     selections: new Set()
+  }
+
+  hasBasicInfo = () => {
+    let { user } = this.state;
+    if (user.firstName &&
+        user.lastName &&
+        user.zipcode &&
+        user.birthyear) {
+      return true
+      //user.hasBasicInfo = true;
+      //this.setState({user});
+    } else {
+      return false
+    }
   }
 
   load = async () => {
@@ -31,6 +54,8 @@ export default class UserContainer extends Container {
         registered: false,
         lastRegistrationCheck: null,
         token: null,
+        firstName: null,
+        lastName: null,
         zipcode: null,
         birthyear: null,
       }

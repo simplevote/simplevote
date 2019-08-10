@@ -18,6 +18,7 @@ export default class RedButton extends React.Component {
       <View style={styles.buttonContainer}>
         <Button
           title={this.props.text}
+          disabled={this.props.disabled}
           buttonStyle={[styles.redButtonExtra, Style.buttons.bigRed]}
           titleStyle={[Style.buttons.redText, styles.redButtonTextExtra]}
           onPress={() => {this.props.navigation.navigate('CheckRegistration')}}
