@@ -5,7 +5,6 @@ import {
   View,
   Dimensions
 } from 'react-native';
-import { Button } from 'react-native-elements';
 import {
   widthPercentageToDP as wp
 } from 'react-native-responsive-screen';
@@ -15,6 +14,10 @@ import RedButton from '../components/RedButton';
 import AlreadyRegisteredButton from '../components/AlreadyRegisteredButton';
 
 export default class HomeScreen extends React.Component {
+  onSubmit = () => {
+    this.props.navigation.navigate("CheckRegistration")
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -29,6 +32,9 @@ export default class HomeScreen extends React.Component {
           <RedButton
             navigation={this.props.navigation}
             text={"Register to vote"}
+            onSubmit={this.onSubmit}
+            backgroundColor={Style.colors.RED}
+            textColor={Style.colors.WHITE}
           />
           <AlreadyRegisteredButton navigation={this.props.navigation} />
       </View>

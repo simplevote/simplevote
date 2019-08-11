@@ -8,13 +8,16 @@ const darkImperialBlue  = '#00496D';
 const spaceCadet        = '#1D3557';
 const desire            = '#E63946';
 
+const WHITE             = '#ffffff';
 const DARK_BLUE         = '#234C73';
 const VERY_LIGHT_GRAY   = '#ADACAD';
-const VERY_LIGHT_GRAY2  = '#DBDB9DB';
+const VERY_LIGHT_GRAY2  = '#DBD9DB';
 const LIGHT_GRAY        = '#F6F4F6';
+const LIGHT_GRAY2       = '#E2E1E2';
 const DARKISH_GRAY      = '#979797';
 const DARKER_GRAY       = '#737273';
 const DARK_GRAY         = '#36382E';
+const DARK_GRAY2        = '#4A4A4A';
 const GRAYISH           = '#DADAD9';
 const LIGHT_BLUE        = '#4FC5DC';
 
@@ -38,12 +41,16 @@ export const Style = {
     darkImperialBlue,
     spaceCadet,
     desire,
+    WHITE,
     RED,
     LIGHT_BLUE,
     DARK_BLUE,
+    VERY_LIGHT_GRAY2,
     LIGHT_GRAY,
+    LIGHT_GRAY2,
     DARKISH_GRAY,
-    GRAYISH
+    GRAYISH,
+    DARK_GRAY2
   },
   fonts: {
    size: {
@@ -80,7 +87,7 @@ export const Style = {
   },
   buttons: {
     bigRed: {
-      backgroundColor: RED,
+      //backgroundColor: RED,
       borderRadius: 35,
       marginVertical: 40,
     },

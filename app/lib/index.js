@@ -76,7 +76,7 @@ function inWords (num) {
     str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
     str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
     str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) : '';
     return str;
 }
 
@@ -484,16 +484,14 @@ function createTargetSmartData(form, addr) {
  * TargetSmart registration check api
  */
 
-function checkRegistrationTargetSmart(formData, details) {
-  let data = createTargetSmartData(formData, details);
+function checkRegistrationTargetSmart(user) {
   let base = 'https://296o7y8823.execute-api.us-east-1.amazonaws.com'
   let resource = '/default/proxyTargetSmartTest'
   let body = JSON.stringify({
-    first_name: data.first_name,
-    last_name: data.last_name,
-    state: data.state,
-    birth_year: data.birth_year
-    //unparsed_full_address: data.unparsed_full_address
+    first_name: user.firstName,
+    last_name: user.lastName,
+    state: user.zipcode,
+    birth_year: user.birthyear
   });
   let url = base + resource;
   let headers = new Headers({

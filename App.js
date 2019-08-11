@@ -13,6 +13,7 @@ import UserContainer from './app/lib/UserContainer';
 import LandingPageScreen from './app/screens/LandingPage';
 import HomeScreen from './app/screens/Home';
 import CheckRegistrationScreen from './app/screens/CheckRegistration';
+import RegistrationStatusScreen from './app/screens/RegistrationStatus';
 
 
 const Stack = createStackNavigator({
@@ -40,6 +41,16 @@ const Stack = createStackNavigator({
     screen: (props) => (
       <Subscribe to={[UserContainer]}>
         {container => (<CheckRegistrationScreen {...props} container={container} />)}
+      </Subscribe>
+    ),
+    navigationOptions: {
+      header: null
+    }
+  },
+  RegistrationStatus: {
+    screen: (props) => (
+      <Subscribe to={[UserContainer]}>
+        {container => (<RegistrationStatusScreen {...props} container={container} />)}
       </Subscribe>
     ),
     navigationOptions: {
