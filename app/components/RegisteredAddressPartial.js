@@ -21,7 +21,7 @@ export default class RegisteredAddressPartial extends Component {
     const { user } = this.props.container.state
     user.registered = true
     this.props.container.setUser(user);
-    this.props.navigation.navigate("Elections");
+    this.props.navigation.navigate("CongratsRegistered");
   }
 
   render() {

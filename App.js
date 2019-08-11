@@ -14,6 +14,7 @@ import LandingPageScreen from './app/screens/LandingPage';
 import HomeScreen from './app/screens/Home';
 import CheckRegistrationScreen from './app/screens/CheckRegistration';
 import RegistrationStatusScreen from './app/screens/RegistrationStatus';
+import CongratsRegistered from './app/screens/CongratsRegistered';
 
 
 const Stack = createStackNavigator({
@@ -57,6 +58,16 @@ const Stack = createStackNavigator({
       header: null
     }
   },
+  CongratsRegistered: {
+    screen: (props) => (
+      <Subscribe to={[UserContainer]}>
+        {container => (<CongratsRegistered {...props} container={container} />)}
+      </Subscribe>
+    ),
+    navigationOptions: {
+      header: null
+    }
+  }
 });
 
 const AppContainer = createAppContainer(Stack);

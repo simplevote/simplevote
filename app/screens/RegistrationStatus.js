@@ -34,7 +34,7 @@ export default class RegistrationStatusScreen extends Component {
 
   _createView = () => {
     const { user } = this.props.container.state;
-    return Object.prototype.hasOwnProperty(user.registration_result, 'result')
+    return user.registration_result.result
       ? this._createRegisteredView(user.registration_result)
       : this._createNonregisteredView(user.registration_result);
   }
