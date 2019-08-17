@@ -45,10 +45,10 @@ export default class LandingPageScreen extends React.Component {
 
   _checkRegistration = (user) => {
     return !user.registered && !user.lastRegistrationCheck
-      ? "Home"
+      ? "RegisterVoterEligibility"
       : !user.registered && user.lastRegistrationCheck
         ? "Home"
-        : "CheckRegistration"
+        : "RegisterVoterEligibility"
   }
 
   _cacheResources = async () => {

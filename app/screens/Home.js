@@ -18,6 +18,10 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.navigate("CheckRegistration")
   }
 
+  onSubmitRegister = () => {
+    this.props.navigation.navigate("RegisterBasicInformation")
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -32,7 +36,7 @@ export default class HomeScreen extends React.Component {
           <RedButton
             navigation={this.props.navigation}
             text={"Register to vote"}
-            onSubmit={this.onSubmit}
+            onSubmit={this.onSubmitRegister}
             backgroundColor={Style.colors.RED}
             textColor={Style.colors.WHITE}
           />

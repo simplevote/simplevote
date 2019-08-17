@@ -24,9 +24,27 @@ export default class UserContainer extends Container {
       lastName: null,
       zipcode: null,
       birthyear: null,
-      hasBasicInfo: null
+      socialSecurityNumber: null,
+      isNotFelon: false,
+      isNotMentallyIncompetent: false,
+      isNotClaimedElsewhere: false,
+      hasBasicInfo: false,
+      isEligible: false
+
     },
     selections: new Set()
+  }
+
+  isEligible = () => {
+    let { user } = this.state;
+    if (user.socialSecurityNumber &&
+        user.isNotFelon &&
+        user.isNotMentallyIncompetent &&
+        user.isNotClaimedElsewhere) {
+      return true
+    } else {
+      return false
+    }
   }
 
   hasBasicInfo = () => {
@@ -44,7 +62,7 @@ export default class UserContainer extends Container {
   }
 
   load = async () => {
-    // await Lib.Storage.set('USER', null);
+    //await Lib.Storage.set('USER', null);
     // Load the user
     let user = await Lib.Storage.get('USER');
     if (!user) {

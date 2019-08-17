@@ -2564,6 +2564,10 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
+install@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.13.0.tgz#6af6e9da9dd0987de2ab420f78e60d9c17260776"
+
 invariant@2.2.4, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -4131,6 +4135,10 @@ react-navigation@^3.11.1:
     react-navigation-drawer "~1.2.1"
     react-navigation-stack "~1.4.0"
     react-navigation-tabs "~1.1.4"
+
+react-npm@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/react-npm/-/react-npm-2.6.1.tgz#e5361b2360e064043a0f15709e177475874c7dc3"
 
 react-proxy@^1.1.7:
   version "1.1.8"
