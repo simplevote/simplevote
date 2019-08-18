@@ -45,19 +45,19 @@ const partyOptions = [{
 export default class AdditionalInfoForm extends React.Component {
   handleAddress = (value) => {
     let { user } = this.props.container.state
-    user.socialSecurityNumber = value
+    user.homeAddress = value
     this.props.container.setState({user})
   }
 
   handleGender = (value) => {
     let { user } = this.props.container.state
-    user.isNotFelon = value
+    user.gender = value
     this.props.container.setState({user})
   }
 
   handleParty = (value) => {
     let { user } = this.props.container.state
-    user.isNotMentallyIncompetent = value
+    user.party = value
     this.props.container.setState({user})
   }
 
@@ -69,13 +69,15 @@ export default class AdditionalInfoForm extends React.Component {
         <View style={styles.text}>
           <FloatingLabel
             style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10}]}
-            onChangeText={this.handleSocialSecurityNumber}
+            onChangeText={this.handleAddress}
             inputStyle={Style.forms.input}
             labelStyle={Style.forms.input}
           >Home Address</FloatingLabel>
         <Dropdown
           label='Gender'
           data={genderOptions}
+          value={user.gender}
+          onChangeText={this.handleGender}
           //containerStyle={Style.forms.container}
           inputTextStyle={Style.forms.input}
           fontSize={20}
@@ -88,6 +90,8 @@ export default class AdditionalInfoForm extends React.Component {
         <Dropdown
           label='Party'
           data={partyOptions}
+          value={user.party}
+          onChangeText={this.handleParty}
           //containerStyle={Style.forms.container}
           inputTextStyle={Style.forms.input}
           fontSize={20}

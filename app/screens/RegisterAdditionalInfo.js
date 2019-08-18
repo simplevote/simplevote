@@ -32,7 +32,7 @@ export default class RegisterAdditionalInfo extends React.Component {
   }
 
   render() {
-    let disabled = !this.props.container.isEligible();
+    let disabled = !this.props.container.hasAdditionalInfo();
     return (
       <View style={styles.container}>
         <BlueHeaderRegister

@@ -38,6 +38,17 @@ export default class UserContainer extends Container {
     selections: new Set()
   }
 
+  hasAdditionalInfo = () => {
+    let { user } = this.state;
+    if (user.homeAddress &&
+        user.gender &&
+        user.party) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   isEligible = () => {
     let { user } = this.state;
     if (user.socialSecurityNumber &&
@@ -57,8 +68,6 @@ export default class UserContainer extends Container {
         user.zipcode &&
         user.birthyear) {
       return true
-      //user.hasBasicInfo = true;
-      //this.setState({user});
     } else {
       return false
     }
