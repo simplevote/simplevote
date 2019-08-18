@@ -17,6 +17,7 @@ import RegistrationStatusScreen from './app/screens/RegistrationStatus';
 import CongratsRegistered from './app/screens/CongratsRegistered';
 import RegisterBasicInformation from './app/screens/RegisterBasicInformation';
 import RegisterVoterEligibility from './app/screens/RegisterVoterEligibility';
+import RegisterAdditionalInfo from './app/screens/RegisterAdditionalInfo';
 
 
 const Stack = createStackNavigator({
@@ -84,6 +85,16 @@ const Stack = createStackNavigator({
     screen: (props) => (
       <Subscribe to={[UserContainer]}>
         {container => (<RegisterVoterEligibility {...props} container={container} />)}
+      </Subscribe>
+    ),
+    navigationOptions: {
+      header: null
+    }
+  },
+  RegisterAdditionalInfo: {
+    screen: (props) => (
+      <Subscribe to={[UserContainer]}>
+        {container => (<RegisterAdditionalInfo {...props} container={container} />)}
       </Subscribe>
     ),
     navigationOptions: {

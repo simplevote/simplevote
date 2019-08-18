@@ -9,8 +9,7 @@ import {
 import { Style } from '../config/styles';
 import Lib from '../lib/index'
 import BlueHeaderRegister from '../components/BlueHeaderRegister';
-import CheckRegistrationForm from '../components/CheckRegistrationForm';
-import VoterEligibilityForm from '../components/VoterEligibilityForm';
+import AdditionalInfoForm from '../components/AdditionalInfoForm';
 import RedButton from '../components/RedButton';
 import SecurityNotice from '../components/SecurityNotice';
 const {
@@ -22,7 +21,7 @@ import {
 } from 'react-native-material-kit';
 
 
-export default class RegisterVoterEligibilityScreen extends React.Component {
+export default class RegisterAdditionalInfo extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -30,7 +29,6 @@ export default class RegisterVoterEligibilityScreen extends React.Component {
   onSubmit = async () => {
     let { user } = this.props.container.state
     this.props.container.setState({user}, () => {});
-    this.props.navigation.navigate("RegisterAdditionalInfo");
   }
 
   render() {
@@ -38,20 +36,20 @@ export default class RegisterVoterEligibilityScreen extends React.Component {
     return (
       <View style={styles.container}>
         <BlueHeaderRegister
-          step={2}
-          text={"Voter eligibility"}
+          step={3}
+          text={"Additional info"}
         />
         <MKProgress
-          progress={.66}
+          progress={1}
         />
-        <VoterEligibilityForm
+        <AdditionalInfoForm
           container={this.props.container}
           navigation={this.props.navigation}
         />
         <RedButton
           navigation={this.props.navigation}
           disabled={disabled}
-          text={"Continue"}
+          text={"Submit"}
           onSubmit={this.onSubmit}
           backgroundColor={Style.colors.RED}
           textColor={Style.colors.WHITE}

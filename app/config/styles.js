@@ -81,7 +81,7 @@ export const Style = {
       fontWeight: 'bold',
       borderRadius: 0,
       borderWidth: 0,
-      borderBottomWidth: 1.5,
+      borderBottomWidth: 1.25,
       paddingLeft: 0,
     }
   },
