@@ -63,7 +63,6 @@ export default class AdditionalInfoForm extends React.Component {
 
   render() {
     let { user } = this.props.container.state;
-
     return (
       <View style={styles.container}>
         <View style={styles.text}>
@@ -85,7 +84,7 @@ export default class AdditionalInfoForm extends React.Component {
           //color={Style.colors.DARKISH_GRAY}
           textColor={Style.colors.VERY_LIGHT_GRAY}
           labelTextStyle={{fontWeight: 'bold'}}
-          lineWidth={1.25}
+          lineWidth={1}
         />
         <Dropdown
           label='Party'
@@ -97,10 +96,9 @@ export default class AdditionalInfoForm extends React.Component {
           fontSize={20}
           fontWeight={'bold'}
           //color={Style.colors.DARKISH_GRAY}
-          //titleTextStyle={{fontWeight: 'bold'}}
-          labelTextStyle={{fontWeight: 'bold'}}
-          lineWidth={1.25}
           textColor={Style.colors.VERY_LIGHT_GRAY}
+          labelTextStyle={{fontWeight: 'bold'}}
+          lineWidth={1}
         />
         </View>
       </View>

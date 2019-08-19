@@ -70,19 +70,24 @@ export const Style = {
   },
   forms: {
     container: {
-      height: 50,
+      //height: 50,
       borderBottomColor: VERY_LIGHT_GRAY
     },
     inputContainer: {
       borderBottomColor: VERY_LIGHT_GRAY,
     },
+    label: {
+      fontFamily: Platform.OS === 'ios' ? 'Avenir' : 'Roboto',
+      fontWeight: 'bold',
+      paddingLeft: 0,
+    },
     input: {
       fontFamily: Platform.OS === 'ios' ? 'Avenir' : 'Roboto',
       fontWeight: 'bold',
+      paddingLeft: 0,
       borderRadius: 0,
       borderWidth: 0,
-      borderBottomWidth: 1.25,
-      paddingLeft: 0,
+      borderBottomWidth: 1,
     }
   },
   buttons: {

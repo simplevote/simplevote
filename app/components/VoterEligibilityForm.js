@@ -18,7 +18,6 @@ import {
 } from 'react-native-responsive-screen';
 var FloatingLabel = require('react-native-floating-labels');
 
-
 const textInputStyle = StyleSheet.create({
   textfieldWithFloatingLabel: {
     height: 48,  // have to do it on iOS
@@ -73,7 +72,7 @@ export default class VoterEligibilityForm extends React.Component {
             style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10}]}
             onChangeText={this.handleSocialSecurityNumber}
             inputStyle={Style.forms.input}
-            labelStyle={Style.forms.input}
+            labelStyle={Style.forms.label}
           >Social Security Number</FloatingLabel>
         </View>
         <Checkbox
@@ -130,6 +129,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
     height: Dimensions.get('window').height * .5,
+    flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
