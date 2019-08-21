@@ -15,7 +15,7 @@ export default class BlueHeaderPartial extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{this.props.text}</Text>
+        <Text style={[styles.text, this.props.additionalStyle]}>{this.props.text}</Text>
       </View>
     );
   }

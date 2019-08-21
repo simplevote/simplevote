@@ -25,8 +25,8 @@ export default class CongratsRegistered extends React.Component {
     super(props);
   }
 
-  _navigate = (screen) => {
-    this.props.navigation.navigate(screen);
+  onSubmit = async () => {
+    this.props.navigation.navigate("VotingPlan");
   }
 
   render() {

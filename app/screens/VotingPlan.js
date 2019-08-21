@@ -1,57 +1,42 @@
 import React from 'react';
 import {
-
-    StyleSheet,
+  StyleSheet,
   Text,
   View,
   Dimensions
 } from 'react-native';
 import { Style } from '../config/styles';
 import Lib from '../lib/index'
-import BlueHeaderRegister from '../components/BlueHeaderRegister';
-import AdditionalInfoForm from '../components/AdditionalInfoForm';
+import BlueHeader from '../components/BlueHeader';
+import VotingPlanForm from '../components/VotingPlanForm';
 import RedButton from '../components/RedButton';
 import SecurityNotice from '../components/SecurityNotice';
 const {
   checkRegistrationTargetSmart,
   updateUserRegistration
 } = Lib;
-import {
-  MKProgress
-} from 'react-native-material-kit';
 
-
-export default class RegisterAdditionalInfo extends React.Component {
+export default class VotingPlan extends React.Component {
   constructor(props) {
     super(props)
   }
 
-  onSubmit = async () => {
-    let { user } = this.props.container.state;
-    this.props.container.setState({user}, () => {});
-
-    this.props.navigation.navigate("CongratsRegistered");
-  }
-
   render() {
-    let disabled = !this.props.container.hasAdditionalInfo();
+    let { user } = this.props.container.state;
     return (
       <View style={styles.container}>
-        <BlueHeaderRegister
-          step={3}
-          text={"Additional info"}
+        <BlueHeader
+          additionalStyle={{fontWeight: 'bold'}}
+          text={"My voting plan"}
         />
-        <MKProgress
-          progress={1}
-        />
-        <AdditionalInfoForm
+        <VotingPlanForm
           container={this.props.container}
           navigation={this.props.navigation}
         />
         <RedButton
           navigation={this.props.navigation}
-          disabled={disabled}
-          text={"Submit"}
+          disabled={false}
+          text={"Create a calendar invite"}
           onSubmit={this.onSubmit}
           backgroundColor={Style.colors.RED}
           textColor={Style.colors.WHITE}

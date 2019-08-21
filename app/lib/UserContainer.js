@@ -29,11 +29,12 @@ export default class UserContainer extends Container {
       isNotMentallyIncompetent: false,
       isNotClaimedElsewhere: false,
       homeAddress: null,
-      gender: null,
-      party: null,
+      gender: '',
+      party: '',
       hasBasicInfo: false,
       isEligible: false,
-      hasAdditionalInfo: false
+      hasAdditionalInfo: false,
+      votingTime: null
     },
     selections: new Set()
   }
