@@ -13,9 +13,31 @@ import {
 var FloatingLabel = require('react-native-floating-labels');
 
 const timeOptions = [{
+    value: '6:00am'
+}, {
+    value: '7:00'
+}, {
+    value: '8:00'
+}, {
     value: '9:00'
 }, {
     value: '10:00'
+}, {
+    value: '11:00'
+}, {
+    value: '12:00pm'
+}, {
+    value: '1:00'
+}, {
+    value: '2:00'
+}, {
+    value: '3:00'
+}, {
+    value: '4:00'
+}, {
+    value: '5:00'
+}, {
+    value: '6:00'
 }]
 
 export default class VotingPlanForm extends React.Component {
@@ -45,11 +67,12 @@ export default class VotingPlanForm extends React.Component {
           labelTextStyle={{fontWeight: 'bold'}}
           lineWidth={1}
         />
-        <View style={styles.pollingPlace}>
-          <Text style={styles.pollingPlaceLabel}>Recommended Polling Place</Text>
-          <Text style={styles.pollingPlaceAddressStreet}>123 Fake Street</Text>
-          <Text style={styles.pollingPlaceAddressStreet}>Anytown, KY 12345</Text>
-        </View>
+        <Text style={{color: Style.colors.VERY_LIGHT_GRAY}}>If you're in line by 6pm, you'll be able to vote </Text>
+          <View style={styles.pollingPlace}>
+            <Text style={styles.pollingPlaceLabel}>Recommended Polling Place</Text>
+            <Text style={styles.pollingPlaceAddressStreet}>123 Fake Street</Text>
+            <Text style={styles.pollingPlaceAddressStreet}>Anytown, KY 12345</Text>
+          </View>
         </View>
       </View>
     );

@@ -41,6 +41,28 @@ async function registerForPushNotificationsAsync(user) {
   return { token, tokenResponse }
 }
 
+async function getCalendarPermissionsAsync() {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.CALENDAR
+  );
+  let finalStatus = existingStatus;
+
+  // only ask if permissions have not already been determined, because
+  // iOS won't necessarily prompt the user a second time.
+  if (existingStatus !== 'granted') {
+    // Android remote notification permissions are granted during the app
+    // install, so this will only ask on iOS
+    const { status } = await Permissions.askAsync(Permissions.CALENDAR);
+    finalStatus = status;
+  }
+
+  // Stop here if the user did not grant permissions
+  if (finalStatus !== 'granted') {
+    return;
+  }
+
+  return finalStatus
+}
 
 /*
  *
@@ -973,6 +995,7 @@ const Storage = {
 
 export default {
   registerForPushNotificationsAsync,
+  getCalendarPermissionsAsync,
   findOrCreateUser,
   putNotificationToken,
   updateNotificationToken,
