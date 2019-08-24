@@ -6,10 +6,6 @@ import {
   Dimensions
 } from 'react-native';
 import { Style } from '../config/styles';
-import {
-  MKTextField,
-  mdl
-} from 'react-native-material-kit';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
   widthPercentageToDP as wp
@@ -64,6 +60,13 @@ export default class AdditionalInfoForm extends React.Component {
     container.update(user);
   }
 
+  handleCity = (value) => {
+    let { container } = this.props;
+    let { user } = container.state;
+    user.city = value
+    container.update(user);
+  }
+
   handleZipcode = (value) => {
     let { container } = this.props;
     let { user } = container.state;
@@ -96,6 +99,12 @@ export default class AdditionalInfoForm extends React.Component {
             inputStyle={Style.forms.input}
             labelStyle={Style.forms.input}
           >Street Address</FloatingLabel>
+          <FloatingLabel
+            style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10}]}
+            onChangeText={this.handleCity}
+            inputStyle={Style.forms.input}
+            labelStyle={Style.forms.input}
+          >City</FloatingLabel>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <FloatingLabel
             style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10, width: Dimensions.get('window').width * .25}]}
@@ -118,12 +127,14 @@ export default class AdditionalInfoForm extends React.Component {
             labelStyle={Style.forms.input}
           >Zipcode</FloatingLabel>
         </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Dropdown
           label='Gender'
           data={genderOptions}
           value={user.gender}
           onChangeText={this.handleGender}
-          inputTextStyle={Style.forms.input}
+          containerStyle={{width: Dimensions.get('window').width * .35}}
+          inputTextStyle={[Style.forms.input]}
           fontSize={20}
           fontWeight={'bold'}
           textColor={Style.colors.VERY_LIGHT_GRAY}
@@ -135,13 +146,15 @@ export default class AdditionalInfoForm extends React.Component {
           data={partyOptions}
           value={user.party}
           onChangeText={this.handleParty}
-          inputTextStyle={Style.forms.input}
+          containerStyle={{width: Dimensions.get('window').width * .5}}
+          inputTextStyle={[Style.forms.input]}
           fontSize={20}
           fontWeight={'bold'}
           textColor={Style.colors.VERY_LIGHT_GRAY}
           labelTextStyle={{fontWeight: 'bold'}}
           lineWidth={1}
         />
+        </View>
         </View>
       </View>
     );

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { Style } from '../config/styles';
 import {
   View,
@@ -10,6 +11,10 @@ import {
 import {
   widthPercentageToDP as wp
 } from 'react-native-responsive-screen';
+import Lib from '../lib/index'
+const {
+  formatUserAddress
+} = Lib;
 
 
 export default class RegisteredAddressPartial extends Component {
@@ -18,9 +23,13 @@ export default class RegisteredAddressPartial extends Component {
   }
 
   _handlePress = () => {
-    const { user } = this.props.container.state
+    const { result, container } = this.props;
+    let { user } = container.state;
     user.registered = true
-    this.props.container.setUser(user);
+    user.street = _.startCase(_.toLower(result['vb.vf_reg_address_1']));
+    user.city = _.startCase(_.toLower(result['vb.vf_reg_city']));
+    user.formattedAddress = formatUserAddress(user);
+    container.update(user);
     this.props.navigation.navigate("CongratsRegistered");
   }
 

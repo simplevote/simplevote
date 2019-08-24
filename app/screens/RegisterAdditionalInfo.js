@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-
-    StyleSheet,
+  StyleSheet,
   Text,
   View,
   Dimensions
@@ -14,7 +13,8 @@ import RedButton from '../components/RedButton';
 import SecurityNotice from '../components/SecurityNotice';
 const {
   checkRegistrationTargetSmart,
-  updateUserRegistration
+  updateUserRegistration,
+  formatUserAddress
 } = Lib;
 import {
   MKProgress
@@ -32,6 +32,7 @@ export default class RegisterAdditionalInfo extends React.Component {
     user.registered = true;
     user.isRegistering = false;
     user.registrationStep = "RegisterBasicInformation";
+    user.formattedAddress = formatUserAddress(user);
     container.update(user);
     this.props.navigation.navigate("CongratsRegistered");
   }
