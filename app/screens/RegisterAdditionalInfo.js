@@ -27,9 +27,12 @@ export default class RegisterAdditionalInfo extends React.Component {
   }
 
   onSubmit = async () => {
-    let { user } = this.props.container.state;
-    this.props.container.setState({user}, () => {});
-
+    let { container } = this.props;
+    let { user } = container.state;
+    user.registered = true;
+    user.isRegistering = false;
+    user.registrationStep = "RegisterBasicInformation";
+    container.update(user);
     this.props.navigation.navigate("CongratsRegistered");
   }
 

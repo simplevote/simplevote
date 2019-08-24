@@ -27,7 +27,6 @@ export default class LandingPageScreen extends React.Component {
 
   componentDidMount = async () => {
     const { container } = this.props;
-
     // Cache image resources
     await this._cacheResources();
     // Load the user information
@@ -44,11 +43,17 @@ export default class LandingPageScreen extends React.Component {
   }
 
   _checkRegistration = (user) => {
-    return !user.registered && !user.lastRegistrationCheck
-      ? "CheckRegistration"
-      : !user.registered && user.lastRegistrationCheck
-        ? "Home"
-        : "VotingPlan"
+    return user.registered
+      ? "VotingPlan"
+      : user.isRegistering
+        ? user.registrationStep
+        : "Home"
+
+    //return !user.registered && !user.lastRegistrationCheck
+    //  ? "Home"
+    //  : !user.registered && user.lastRegistrationCheck
+    //    ? "Home"
+    //    : "Home"
   }
 
   _cacheResources = async () => {

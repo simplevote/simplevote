@@ -110,7 +110,6 @@ export default class VotingPlan extends React.Component {
           backgroundColor={Style.colors.RED}
           textColor={Style.colors.WHITE}
         />
-        <SecurityNotice />
         <Menu
           opened={opened}
           renderer={SlideInMenu}

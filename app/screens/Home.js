@@ -18,29 +18,34 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.navigate("CheckRegistration")
   }
 
-  onSubmitRegister = () => {
+  onSubmitRegister = async () => {
+    let { container } = this.props;
+    let { user } = container.state;
+    user.isRegistering = true;
+    user.registrationStep = "RegisterBasicInformation";
+    container.update(user);
     this.props.navigation.navigate("RegisterBasicInformation")
   }
 
   render() {
     return (
       <View style={styles.container}>
-          <View style={styles.logoContainer}>
-            <View style={styles.logo}></View>
-            <Text style={styles.name}>
-               <Text>Simple</Text>
-               <Text style={styles.highlight}>Vote</Text>
-            </Text>
-            <Text style={styles.valueProps}>Registration &#183; Polling locations &#183; Voter guides</Text>
-          </View>
-          <RedButton
-            navigation={this.props.navigation}
-            text={"Register to vote"}
-            onSubmit={this.onSubmitRegister}
-            backgroundColor={Style.colors.RED}
-            textColor={Style.colors.WHITE}
-          />
-          <AlreadyRegisteredButton navigation={this.props.navigation} />
+        <View style={styles.logoContainer}>
+          <View style={styles.logo}></View>
+          <Text style={styles.name}>
+             <Text>Simple</Text>
+             <Text style={styles.highlight}>Vote</Text>
+          </Text>
+          <Text style={styles.valueProps}>Registration &#183; Polling locations &#183; Voter guides</Text>
+        </View>
+        <RedButton
+          navigation={this.props.navigation}
+          text={"Register to vote"}
+          onSubmit={this.onSubmitRegister}
+          backgroundColor={Style.colors.RED}
+          textColor={Style.colors.WHITE}
+        />
+        <AlreadyRegisteredButton navigation={this.props.navigation} />
       </View>
     );
   }

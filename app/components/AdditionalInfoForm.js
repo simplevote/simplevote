@@ -44,21 +44,24 @@ const partyOptions = [{
 
 export default class AdditionalInfoForm extends React.Component {
   handleAddress = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.homeAddress = value
-    this.props.container.setState({user})
+    container.update(user);
   }
 
   handleGender = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.gender = value
-    this.props.container.setState({user})
+    container.update(user);
   }
 
   handleParty = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.party = value
-    this.props.container.setState({user})
+    container.update(user);
   }
 
   render() {
@@ -77,11 +80,9 @@ export default class AdditionalInfoForm extends React.Component {
           data={genderOptions}
           value={user.gender}
           onChangeText={this.handleGender}
-          //containerStyle={Style.forms.container}
           inputTextStyle={Style.forms.input}
           fontSize={20}
           fontWeight={'bold'}
-          //color={Style.colors.DARKISH_GRAY}
           textColor={Style.colors.VERY_LIGHT_GRAY}
           labelTextStyle={{fontWeight: 'bold'}}
           lineWidth={1}
@@ -91,11 +92,9 @@ export default class AdditionalInfoForm extends React.Component {
           data={partyOptions}
           value={user.party}
           onChangeText={this.handleParty}
-          //containerStyle={Style.forms.container}
           inputTextStyle={Style.forms.input}
           fontSize={20}
           fontWeight={'bold'}
-          //color={Style.colors.DARKISH_GRAY}
           textColor={Style.colors.VERY_LIGHT_GRAY}
           labelTextStyle={{fontWeight: 'bold'}}
           lineWidth={1}

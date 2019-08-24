@@ -20,6 +20,8 @@ export default class UserContainer extends Container {
       id: null,
       createdAt: null,
       registered: false,
+      isRegistering: false,
+      registrationStep: "RegisterBasicInformation",
       firstName: null,
       lastName: null,
       zipcode: null,
@@ -83,12 +85,25 @@ export default class UserContainer extends Container {
         id: uuid(),
         createdAt: new Date(),
         registered: false,
+        isRegistering: false,
+        registrationStep: null,
         lastRegistrationCheck: null,
         token: null,
         firstName: null,
         lastName: null,
         zipcode: null,
         birthyear: null,
+        socialSecurityNumber: null,
+        isNotFelon: false,
+        isNotMentallyIncompetent: false,
+        isNotClaimedElsewhere: false,
+        homeAddress: null,
+        gender: '',
+        party: '',
+        votingTime: '',
+        hasBasicInfo: false,
+        isEligible: false,
+        hasAdditionalInfo: false,
       }
       await Lib.Storage.set('USER', user);
     }
@@ -116,40 +131,41 @@ export default class UserContainer extends Container {
       : new Set()
     let referendaSelections = await Lib.Storage.get('REFERENDA_SELECTIONS') || [];
 
+    // Set the loading state
     this.setState({loading: true});
 
-    const {
-      election,
-      contests,
-      pollingPlace,
-      state,
-      representatives,
-      ocdIds,
-      registrationDeadlines
-    } = await fetchUserCivicInfo(user);
+    //const {
+    //  election,
+    //  contests,
+    //  pollingPlace,
+    //  state,
+    //  representatives,
+    //  ocdIds,
+    //  registrationDeadlines
+    //} = await fetchUserCivicInfo(user);
 
-    const {
-      nextMethod,
-      nextDeadline,
-      filteredDeadlines
-    } = prepRegistrationDeadlines(
-        registrationDeadlines,
-        this.state.today
-    );
+    //const {
+    //  nextMethod,
+    //  nextDeadline,
+    //  filteredDeadlines
+    //} = prepRegistrationDeadlines(
+    //    registrationDeadlines,
+    //    this.state.today
+    //);
 
-    updateCandidates(contests, selections);
-    updateReferenda(contests, referendaSelections);
+    //updateCandidates(contests, selections);
+    //updateReferenda(contests, referendaSelections);
 
-    user.election = election;
-    user.contests = contests;
-    user.pollingPlace = pollingPlace;
-    user.state = state;
-    user.representatives = representatives;
-    user.ocdIds = ocdIds;
-    user.registrationDeadlines = registrationDeadlines;
-    user.nextMethod = nextMethod;
-    user.nextDeadline = nextDeadline;
-    user.filteredDealines = filteredDeadlines;
+    //user.election = election;
+    //user.contests = contests;
+    //user.pollingPlace = pollingPlace;
+    //user.state = state;
+    //user.representatives = representatives;
+    //user.ocdIds = ocdIds;
+    //user.registrationDeadlines = registrationDeadlines;
+    //user.nextMethod = nextMethod;
+    //user.nextDeadline = nextDeadline;
+    //user.filteredDealines = filteredDeadlines;
 
     this.setState({
       loading: false,

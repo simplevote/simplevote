@@ -39,26 +39,34 @@ const TextfieldWithFloatingLabel = MKTextField.textfieldWithFloatingLabel()
 
 export default class VoterEligibilityForm extends React.Component {
   handleSocialSecurityNumber = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.socialSecurityNumber = value
+    container.update(user);
     this.props.container.setState({user})
   }
 
   handleIsNotFelon = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.isNotFelon = value
+    container.update(user);
     this.props.container.setState({user})
   }
 
   handleIsNotMentallyIncompetent = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.isNotMentallyIncompetent = value
+    container.update(user);
     this.props.container.setState({user})
   }
 
   handleIsNotClaimedElsewhere = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.isNotClaimedElsewhere = value
+    container.update(user);
     this.props.container.setState({user});
   }
 
@@ -71,6 +79,7 @@ export default class VoterEligibilityForm extends React.Component {
           <FloatingLabel
             style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10}]}
             onChangeText={this.handleSocialSecurityNumber}
+            value={user.socialSecurityNumber}
             inputStyle={Style.forms.input}
             labelStyle={Style.forms.label}
           >Social Security Number</FloatingLabel>

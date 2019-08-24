@@ -27,8 +27,11 @@ export default class RegisterVoterEligibilityScreen extends React.Component {
   }
 
   onSubmit = async () => {
-    let { user } = this.props.container.state
-    this.props.container.setState({user}, () => {});
+    let { container } = this.props;
+    let { user } = container.state;
+    user.registrationStep = "RegisterAdditionalInfo";
+    console.log('updateing addtional info');
+    container.update(user);
     this.props.navigation.navigate("RegisterAdditionalInfo");
   }
 

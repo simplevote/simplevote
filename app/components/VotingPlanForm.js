@@ -41,11 +41,11 @@ const timeOptions = [{
 }]
 
 export default class VotingPlanForm extends React.Component {
-
-  handleTime = (value) => {
-    let { user } = this.props.container.state
+  handleTime = async (value) => {
+    let { container } = this.props;
+    let { user } = container.state;
     user.votingTime = value
-    this.props.container.setState({user})
+    container.update(user);
   }
 
   render() {

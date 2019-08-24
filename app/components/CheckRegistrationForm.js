@@ -15,30 +15,35 @@ export default class CheckRegistrationForm extends React.Component {
   }
   // add handlers for each form value to set the user's state
   handleEndFirstName = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.firstName = value
-    this.props.container.setState({user})
+    container.update(user);
   }
 
   handleEndLastName = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.lastName = value
-    this.props.container.setState({user})
+    container.update(user);
   }
 
   handleEndZipcode = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.zipcode = value
-    this.props.container.setState({user})
+    container.update(user);
   }
 
   handleEndBirthyear = (value) => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     user.birthyear = value
-    this.props.container.setState({user})
+    container.update(user);
   }
 
   render() {
+    let { user } = this.props.container.state;
     return (
       <KeyboardAwareScrollView
         innerRef={ref => {this.scroll = ref}}
@@ -51,24 +56,28 @@ export default class CheckRegistrationForm extends React.Component {
         <FloatingLabel
           style={[Style.forms.container, Style.forms.inputContainer]}
           onChangeText={this.handleEndFirstName}
+          value={user.firstName}
           inputStyle={Style.forms.input}
           labelStyle={Style.forms.label}
         >Legal first name</FloatingLabel>
         <FloatingLabel
           style={[Style.forms.container, Style.forms.inputContainer]}
           onChangeText={this.handleEndLastName}
+          value={user.lastName}
           inputStyle={Style.forms.input}
           labelStyle={Style.forms.label}
         >Legal last name</FloatingLabel>
         <FloatingLabel
           style={[Style.forms.container, Style.forms.inputContainer]}
           onChangeText={this.handleEndZipcode}
+          value={user.zipcode}
           inputStyle={Style.forms.input}
           labelStyle={Style.forms.label}
         >Zipcode</FloatingLabel>
         <FloatingLabel
           style={[Style.forms.container, Style.forms.inputContainer]}
           onChangeText={this.handleEndBirthyear}
+          value={user.birthyear}
           inputStyle={Style.forms.input}
           labelStyle={Style.forms.label}
         >Birthyear</FloatingLabel>

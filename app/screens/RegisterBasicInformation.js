@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-
-    StyleSheet,
+  StyleSheet,
   Text,
   View,
   Dimensions
@@ -25,13 +24,15 @@ import {
 export default class RegisterBasicInformationScreen extends React.Component {
   constructor(props) {
     super(props)
-    console.log(MKProgress)
   }
 
   onSubmit = async () => {
-    let { user } = this.props.container.state
+    let { container } = this.props;
+    let { user } = container.state;
     const registration_status = await checkRegistrationTargetSmart(user)
     user = updateUserRegistration(user, registration_status)
+    user.registrationStep = "RegisterVoterEligibility"
+    container.update(user);
 
     this.props.container.setState({user}, () => {
       if (registration_status.result) {
