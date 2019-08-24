@@ -1,6 +1,6 @@
 import { Container } from 'unstated';
-import moment from 'moment';
 import { v4 as uuid } from 'uuid';
+import moment from 'moment';
 import Lib from './index';
 
 const {
@@ -43,7 +43,9 @@ export default class UserContainer extends Container {
 
   hasAdditionalInfo = () => {
     let { user } = this.state;
-    if (user.homeAddress &&
+    if (user.street &&
+        user.state &&
+        user.zipcode &&
         user.gender &&
         user.party) {
       return true
@@ -77,7 +79,7 @@ export default class UserContainer extends Container {
   }
 
   load = async () => {
-    //await Lib.Storage.set('USER', null);
+    // await Lib.Storage.set('USER', null);
     // Load the user
     let user = await Lib.Storage.get('USER');
     if (!user) {

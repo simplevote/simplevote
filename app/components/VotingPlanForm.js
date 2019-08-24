@@ -68,7 +68,7 @@ export default class VotingPlanForm extends React.Component {
             lineWidth={1}
           />
           <View style={styles.pollingPlace}>
-            <Text style={styles.pollingPlaceLabel}>Recommended Polling Place</Text>
+            <Text style={styles.pollingPlaceLabel}>Polling Place</Text>
             <Text style={styles.pollingPlaceAddressStreet}>123 Fake Street</Text>
             <Text style={styles.pollingPlaceAddressStreet}>Anytown, KY 12345</Text>
           </View>

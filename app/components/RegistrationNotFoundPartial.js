@@ -25,8 +25,17 @@ export default class RegistrationNotFoundPartial extends Component {
     super(props);
   }
 
-  onRegister = () => {
+  onTryAgain = () => {
     this.props.navigation.navigate("CheckRegistration")
+  }
+
+  onRegister = () => {
+    let { container } = this.props;
+    let { user } = container.state;
+    user.isRegistering = true;
+    user.registrationStep = "RegisterVoterEligibility"
+    container.update(user);
+    this.props.navigation.navigate("RegisterVoterEligibility")
   }
 
   render() {
@@ -49,7 +58,7 @@ export default class RegistrationNotFoundPartial extends Component {
           <RedButton
             navigation={this.props.navigation}
             text={"Try again?"}
-            onSubmit={this.onRegister}
+            onSubmit={this.onTryAgain}
             backgroundColor={Style.colors.LIGHT_GRAY2}
             textColor={Style.colors.DARK_GRAY2} />
         </View>

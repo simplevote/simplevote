@@ -43,6 +43,7 @@ export default class LandingPageScreen extends React.Component {
   }
 
   _checkRegistration = (user) => {
+    console.log(user)
     return user.registered
       ? "VotingPlan"
       : user.isRegistering

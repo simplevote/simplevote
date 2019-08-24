@@ -43,10 +43,31 @@ const partyOptions = [{
 }]
 
 export default class AdditionalInfoForm extends React.Component {
-  handleAddress = (value) => {
+  handleStreet = (value) => {
     let { container } = this.props;
     let { user } = container.state;
-    user.homeAddress = value
+    user.street = value
+    container.update(user);
+  }
+
+  handleAptNumber = (value) => {
+    let { container } = this.props;
+    let { user } = container.state;
+    user.aptNumber = value
+    container.update(user);
+  }
+
+  handleState = (value) => {
+    let { container } = this.props;
+    let { user } = container.state;
+    user.state = value
+    container.update(user);
+  }
+
+  handleZipcode = (value) => {
+    let { container } = this.props;
+    let { user } = container.state;
+    user.zipcode = value
     container.update(user);
   }
 
@@ -71,10 +92,32 @@ export default class AdditionalInfoForm extends React.Component {
         <View style={styles.text}>
           <FloatingLabel
             style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10}]}
-            onChangeText={this.handleAddress}
+            onChangeText={this.handleStreet}
             inputStyle={Style.forms.input}
             labelStyle={Style.forms.input}
-          >Home Address</FloatingLabel>
+          >Street Address</FloatingLabel>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <FloatingLabel
+            style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10, width: Dimensions.get('window').width * .25}]}
+            onChangeText={this.handleAptNumber}
+            inputStyle={Style.forms.input}
+            labelStyle={Style.forms.input}
+          >Apt</FloatingLabel>
+          <FloatingLabel
+            style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10, width: Dimensions.get('window').width * .25}]}
+            onChangeText={this.handleState}
+            value={user.state}
+            inputStyle={Style.forms.input}
+            labelStyle={Style.forms.input}
+          >State</FloatingLabel>
+          <FloatingLabel
+            style={[Style.forms.container, Style.forms.inputContainer, {marginBottom: 10, width: Dimensions.get('window').width * .25}]}
+            onChangeText={this.handleZipcode}
+            value={user.zipcode}
+            inputStyle={Style.forms.input}
+            labelStyle={Style.forms.input}
+          >Zipcode</FloatingLabel>
+        </View>
         <Dropdown
           label='Gender'
           data={genderOptions}

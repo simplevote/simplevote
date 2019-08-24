@@ -6,10 +6,9 @@ import {
   Dimensions
 } from 'react-native';
 import _ from 'lodash';
-import { Permissions } from 'expo';
+import * as Permissions from 'expo-permissions'
 import * as Calendar from 'expo-calendar'
 import { Style } from '../config/styles';
-//import { Button, Paragraph, Menu, Divider, Provider } from 'react-native-paper';
 import Lib from '../lib/index'
 import BlueHeader from '../components/BlueHeader';
 import VotingPlanForm from '../components/VotingPlanForm';
@@ -18,7 +17,6 @@ import SecurityNotice from '../components/SecurityNotice';
 const {
   getCalendarPermissionsAsync
 } = Lib;
-
 import Menu, {
   MenuProvider,
   MenuOptions,

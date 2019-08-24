@@ -6,6 +6,7 @@ import moment from 'moment';
 import _ from 'lodash';
 import Geocoder from 'react-native-geocoding';
 import { KEYS } from '../config/keys';
+import { STATE_ZIP_MAP } from '../config/zip_state';
 
 Geocoder.setApiKey(KEYS.GOOGLE_GEOCODING_API_KEY)
 
@@ -494,7 +495,7 @@ function createTargetSmartData(form, addr) {
     zip_code: extractAddressComponent(ac, 'postal_code').long_name,
     city: extractAddressComponent(ac, 'locality').long_name,
     state: extractAddressComponent(ac, 'administrative_area_level_1').short_name,
-    birth_year: form.birthYear,
+    birth_year: form.birthyear,
     //birthDate: moment(form.birthDate).format('YYYYMMDD'),
     unparsed_full_address: addr.formatted_address
   };
@@ -512,7 +513,7 @@ function checkRegistrationTargetSmart(user) {
   let body = JSON.stringify({
     first_name: user.firstName,
     last_name: user.lastName,
-    state: user.zipcode,
+    state: STATE_ZIP_MAP[user.zipcode],
     birth_year: user.birthyear
   });
   let url = base + resource;
@@ -961,7 +962,7 @@ function updateUserRegistration(user, registration) {
   user.state = registration.input.state;
   user.registered = registration.result;
   user.registration_result = registration;
-  user.birthYear = registration.birthYear;
+  user.birthyear = registration.birthYear;
   user.lastRegistrationCheck = new Date();
 
   return user
