@@ -42,9 +42,9 @@ const timeOptions = [{
 
 export default class VotingPlanForm extends React.Component {
 
-  handleParty = (value) => {
+  handleTime = (value) => {
     let { user } = this.props.container.state
-    user.party = value
+    user.votingTime = value
     this.props.container.setState({user})
   }
 
@@ -53,21 +53,20 @@ export default class VotingPlanForm extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.text}>
-        <Dropdown
-          label='Time you plan on voting'
-          data={timeOptions}
-          value={user.votingTime}
-          onChangeText={() => {}}
-          //containerStyle={Style.forms.container}
-          inputTextStyle={Style.forms.input}
-          fontSize={20}
-          fontWeight={'bold'}
-          //color={Style.colors.DARKISH_GRAY}
-          textColor={Style.colors.VERY_LIGHT_GRAY}
-          labelTextStyle={{fontWeight: 'bold'}}
-          lineWidth={1}
-        />
-        <Text style={{color: Style.colors.VERY_LIGHT_GRAY}}>If you're in line by 6pm, you'll be able to vote </Text>
+          <Dropdown
+            label='Time you plan on voting'
+            data={timeOptions}
+            value={user.votingTime}
+            onChangeText={this.handleTime}
+            //containerStyle={Style.forms.container}
+            inputTextStyle={Style.forms.input}
+            fontSize={20}
+            fontWeight={'bold'}
+            //color={Style.colors.DARKISH_GRAY}
+            textColor={Style.colors.VERY_LIGHT_GRAY}
+            labelTextStyle={{fontWeight: 'bold'}}
+            lineWidth={1}
+          />
           <View style={styles.pollingPlace}>
             <Text style={styles.pollingPlaceLabel}>Recommended Polling Place</Text>
             <Text style={styles.pollingPlaceAddressStreet}>123 Fake Street</Text>

@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Provider, Subscribe } from 'unstated';
+import { MenuProvider } from 'react-native-popup-menu';
 import { Button } from 'react-native-elements';
 
 import UserContainer from './app/lib/UserContainer';
@@ -117,11 +118,13 @@ const Stack = createStackNavigator({
 const AppContainer = createAppContainer(Stack);
 
 const App = () => (
+  <MenuProvider>
   <Provider>
     <Subscribe to={[UserContainer]}>
       {container => <AppContainer container={container} /> }
     </Subscribe>
   </Provider>
+  </MenuProvider>
 );
 
 export default App
