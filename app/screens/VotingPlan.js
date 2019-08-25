@@ -31,6 +31,22 @@ import Menu, {
 import { renderers } from 'react-native-popup-menu';
 const { SlideInMenu } = renderers;
 
+const HOUR_MAP = {
+  '6:00 am': '06:00',
+  '7:00 am': '07:00',
+  '8:00 am': '08:00',
+  '9:00 am': '09:00',
+  '10:00 am': '10:00',
+  '11:00 am': '11:00',
+  '12:00 pm': '12:00',
+  '1:00 pm': '13:00',
+  '2:00 pm': '14:00',
+  '3:00 pm': '15:00',
+  '4:00 pm': '16:00',
+  '5:00 pm': '17:00',
+  '6:00 pm': '18:00',
+}
+
 export default class VotingPlan extends React.Component {
   constructor(props) {
     super(props)
@@ -42,20 +58,25 @@ export default class VotingPlan extends React.Component {
   }
 
   onOptionSelect = async (calendarId) => {
-    const { votingTime } = this.props.container.state.user
-    const time = `2019-11-06T${votingTime.substring(0, votingTime.length-3)}:00.000Z`
+    let { votingTime } = this.props.container.state.user
+    let votingHour = HOUR_MAP[votingTime]
+    const time = `2019-11-06T${votingHour}:00.000Z`
+    let { user } =  this.props.container.state;
     const details = {
       title: "Time to vote!",
       startDate: time,
       endDate: '2019-11-06T08:00:00.000Z',
-      location: "123 Fake Street, Anytown KY",
+      location: user.pollingPlace.formattedLocation.formattedAddress,
       notes: "You'll need your id to vote. If you're in line by 6 pm then you can vote"
     }
 
     const eventId = await Calendar.createEventAsync(calendarId, details)
 
     if (eventId) {
-      this.props.container.setState({isCalendarEventSet: true, eventId});
+      let { user } =  this.props.container.state;
+      user.isCalendarEventSet = true;
+      user.calendarEventId = eventId;
+      this.props.container.setState({user});
       this.setState({opened: false});
       alert("Event created!");
     }
@@ -93,7 +114,15 @@ export default class VotingPlan extends React.Component {
   }
 
   render() {
-    const disabled = this.props.container.state.user.votingTime ? false : true;
+    const { user } = this.props.container.state
+    const disabled = !user.votingTime && !user.isCalendarEventSet
+      ? false
+      : user.votingTime && !user.isCalendarSet
+        ? false
+        : true;
+    const text = user.isCalendarEventSet
+      ? "Calendar invite created"
+      : "Create a calendar invite"
     const menuItems = this.createMenuItems();
     const { opened } = this.state;
     return (
@@ -109,7 +138,7 @@ export default class VotingPlan extends React.Component {
         <RedButton
           navigation={this.props.navigation}
           disabled={disabled}
-          text={"Create a calendar invite"}
+          text={text}
           onSubmit={this.myCalendar}
           backgroundColor={Style.colors.RED}
           textColor={Style.colors.WHITE}

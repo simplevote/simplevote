@@ -38,6 +38,7 @@ export default class UserContainer extends Container {
       hasBasicInfo: false,
       isEligible: false,
       hasAdditionalInfo: false,
+      isCalendarEventSet: false
     },
     selections: new Set()
   }
@@ -108,6 +109,7 @@ export default class UserContainer extends Container {
         hasBasicInfo: false,
         isEligible: false,
         hasAdditionalInfo: false,
+        isCalendarEventSet: false
       }
       await Lib.Storage.set('USER', user);
     }
