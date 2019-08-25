@@ -58,10 +58,10 @@ export default class VotingPlan extends React.Component {
   }
 
   onOptionSelect = async (calendarId) => {
-    let { votingTime } = this.props.container.state.user
-    let votingHour = HOUR_MAP[votingTime]
-    const time = `2019-11-06T${votingHour}:00.000Z`
+    //let { votingTime } = this.props.container.state.user
     let { user } =  this.props.container.state;
+    let votingHour = HOUR_MAP[user.votingTime]
+    let time = `2019-11-06T${votingHour}:00.000Z`
     const details = {
       title: "Time to vote!",
       startDate: time,
@@ -73,10 +73,9 @@ export default class VotingPlan extends React.Component {
     const eventId = await Calendar.createEventAsync(calendarId, details)
 
     if (eventId) {
-      let { user } =  this.props.container.state;
       user.isCalendarEventSet = true;
       user.calendarEventId = eventId;
-      this.props.container.setState({user});
+      this.props.container.update(user);
       this.setState({opened: false});
       alert("Event created!");
     }
@@ -106,20 +105,15 @@ export default class VotingPlan extends React.Component {
 
   myCalendar = async () => {
     const status = await getCalendarPermissionsAsync();
-
     if (status === 'granted') {
       const calendars = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT)
-      this.setState({opened: true, calendars})
+      this.setState({opened: true, calendars});
     }
   }
 
   render() {
     const { user } = this.props.container.state
-    const disabled = !user.votingTime && !user.isCalendarEventSet
-      ? false
-      : user.votingTime && !user.isCalendarSet
-        ? false
-        : true;
+    const disabled = user.isCalendarEventSet ? true : false
     const text = user.isCalendarEventSet
       ? "Calendar invite created"
       : "Create a calendar invite"

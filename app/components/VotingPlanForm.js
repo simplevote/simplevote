@@ -45,6 +45,7 @@ export default class VotingPlanForm extends React.Component {
   handleTime = async (value) => {
     let { container } = this.props;
     let { user } = container.state;
+    // TODO: Update calendar event
     user.votingTime = value;
     container.update(user);
   }
