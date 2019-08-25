@@ -43,7 +43,7 @@ export default class VotingPlan extends React.Component {
 
   onOptionSelect = async (calendarId) => {
     const { votingTime } = this.props.container.state.user
-    const time = `2019-11-06T${votingTime}:00.000Z`
+    const time = `2019-11-06T${votingTime.substring(0, votingTime.length-3)}:00.000Z`
     const details = {
       title: "Time to vote!",
       startDate: time,

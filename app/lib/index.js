@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native';
-import { Permissions, Notifications } from 'expo';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions'
 import { Platform } from 'react-native';
 import { v4 as uuid } from 'uuid';
 import moment from 'moment';

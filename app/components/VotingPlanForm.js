@@ -14,31 +14,31 @@ import {
 var FloatingLabel = require('react-native-floating-labels');
 
 const timeOptions = [{
-    value: '6:00am'
+    value: '6:00 am'
 }, {
-    value: '7:00'
+    value: '7:00 am'
 }, {
-    value: '8:00'
+    value: '8:00 am'
 }, {
-    value: '9:00'
+    value: '9:00 am'
 }, {
-    value: '10:00'
+    value: '10:00 am'
 }, {
-    value: '11:00'
+    value: '11:00 am'
 }, {
-    value: '12:00pm'
+    value: '12:00 pm'
 }, {
-    value: '1:00'
+    value: '1:00 pm'
 }, {
-    value: '2:00'
+    value: '2:00 pm'
 }, {
-    value: '3:00'
+    value: '3:00 pm'
 }, {
-    value: '4:00'
+    value: '4:00 pm'
 }, {
-    value: '5:00'
+    value: '5:00 pm'
 }, {
-    value: '6:00'
+    value: '6:00 pm'
 }]
 
 export default class VotingPlanForm extends React.Component {
