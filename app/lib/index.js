@@ -395,6 +395,9 @@ function processReps(reps) {
 }
 
 
+
+
+
 /*
  *
  *
@@ -618,7 +621,7 @@ function checkRegistration(user) {
  */
 function searchElection(user) {
   let base = "https://www.googleapis.com/civicinfo/v2/voterinfo/"
-  let address = user.address.formattedAddress
+  let address = user.formattedAddress
   let url = `${base}?address=${address}&key=${KEYS.GOOGLE_CIVIC_API_KEY}`;
 
   return fetch(url)
@@ -633,7 +636,7 @@ function searchElection(user) {
  */
 function searchRepresentatives(user) {
   let base = "https://www.googleapis.com/civicinfo/v2/representatives/"
-  let address = user.address.formattedAddress
+  let address = user.formattedAddress
   let url = `${base}?address=${address}&includeOffices=false&key=${KEYS.GOOGLE_CIVIC_API_KEY}`;
 
   return fetch(url)
@@ -663,7 +666,7 @@ function fetchRepresentatives(user) {
  */
 function fetchElection(electionId, user) {
   let baseurl = "https://www.googleapis.com/civicinfo/v2/voterinfo/"
-  let address = user.address.formattedAddress
+  let address = user.formattedAddress
   let url = `${baseurl}?address=${address}&electionId=${electionId}&key=${KEYS.GOOGLE_CIVIC_API_KEY}`;
 
   return fetch(url)
@@ -891,6 +894,21 @@ function formatTime(time) {
 }
 
 
+
+/*
+ *
+ */
+function formatUserAddress(user) {
+  const { street, aptNumber, city, state, zipcode } = user;
+  let address;
+  if (aptNumber) {
+    address = `${street} Apt. ${aptNumber} ${city}, ${state} ${zipcode}`
+  } else {
+    address = `${street} ${city}, ${state} ${zipcode}`
+  }
+  return address
+}
+
 /*
  *
  */
@@ -1006,6 +1024,7 @@ export default {
   sortContacts,
   extractAddressComponent,
   formatAddress,
+  formatUserAddress,
   createTargetSmartData,
   checkRegistrationTargetSmart,
   fetchUserCivicInfo,
@@ -1019,6 +1038,7 @@ export default {
   processDivisions,
   electionDateComparator,
   geocodePollingPlace,
+  processPollingPlace,
   createRepresentativeLevel,
   createContestLevel,
   transformCandidates,

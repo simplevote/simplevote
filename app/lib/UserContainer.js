@@ -33,10 +33,11 @@ export default class UserContainer extends Container {
       homeAddress: null,
       gender: '',
       party: '',
+      votingTime: '',
+      pollingPlace: null,
       hasBasicInfo: false,
       isEligible: false,
       hasAdditionalInfo: false,
-      votingTime: null
     },
     selections: new Set()
   }
@@ -79,7 +80,7 @@ export default class UserContainer extends Container {
   }
 
   load = async () => {
-    // await Lib.Storage.set('USER', null);
+    //await Lib.Storage.set('USER', null);
     // Load the user
     let user = await Lib.Storage.get('USER');
     if (!user) {
@@ -103,6 +104,7 @@ export default class UserContainer extends Container {
         gender: '',
         party: '',
         votingTime: '',
+        pollingPlace: null,
         hasBasicInfo: false,
         isEligible: false,
         hasAdditionalInfo: false,

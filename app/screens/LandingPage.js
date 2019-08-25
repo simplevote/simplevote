@@ -43,18 +43,11 @@ export default class LandingPageScreen extends React.Component {
   }
 
   _checkRegistration = (user) => {
-    console.log(user)
     return user.registered
       ? "VotingPlan"
       : user.isRegistering
         ? user.registrationStep
         : "Home"
-
-    //return !user.registered && !user.lastRegistrationCheck
-    //  ? "Home"
-    //  : !user.registered && user.lastRegistrationCheck
-    //    ? "Home"
-    //    : "Home"
   }
 
   _cacheResources = async () => {

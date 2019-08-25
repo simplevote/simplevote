@@ -6,6 +6,7 @@ import {
   Dimensions
 } from 'react-native';
 import { Style } from '../config/styles';
+import PollingPlace from './PollingPlacePartial';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
   widthPercentageToDP as wp
@@ -67,11 +68,7 @@ export default class VotingPlanForm extends React.Component {
             labelTextStyle={{fontWeight: 'bold'}}
             lineWidth={1}
           />
-          <View style={styles.pollingPlace}>
-            <Text style={styles.pollingPlaceLabel}>Polling Place</Text>
-            <Text style={styles.pollingPlaceAddressStreet}>123 Fake Street</Text>
-            <Text style={styles.pollingPlaceAddressStreet}>Anytown, KY 12345</Text>
-          </View>
+         <PollingPlace container={this.props.container} />
         </View>
       </View>
     );
@@ -88,16 +85,5 @@ const styles = StyleSheet.create({
   },
   text: {
     width: Dimensions.get('window').width * .9,
-  },
-  pollingPlace: {
-    marginVertical: 20
-  },
-  pollingPlaceLabel: {
-    fontSize: wp('4.5%'),
-    color: Style.colors.VERY_LIGHT_GRAY,
-    marginBottom: 5
-  },
-  pollingPlaceAddressStreet: {
-    fontSize: wp('7%')
   }
 });

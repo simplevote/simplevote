@@ -12,10 +12,15 @@ import { Style } from '../config/styles';
 import Lib from '../lib/index'
 import BlueHeader from '../components/BlueHeader';
 import VotingPlanForm from '../components/VotingPlanForm';
+import PollingPlace from '../components/PollingPlacePartial';
 import RedButton from '../components/RedButton';
 import SecurityNotice from '../components/SecurityNotice';
 const {
-  getCalendarPermissionsAsync
+  getCalendarPermissionsAsync,
+  searchRepresentatives,
+  fetchElections,
+  fetchElection,
+  searchElection
 } = Lib;
 import Menu, {
   MenuProvider,
@@ -31,6 +36,7 @@ export default class VotingPlan extends React.Component {
     super(props)
     this.state = {
       opened: false,
+      pollingLocation: null,
       calendars: []
     }
   }

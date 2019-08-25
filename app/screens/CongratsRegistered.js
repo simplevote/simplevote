@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Platform } from 'react-native'
 import { Asset, AppLoading, SplashScreen } from 'expo';
-import Lib from '../lib/index';
 import {
   View,
   Text,
@@ -12,18 +11,28 @@ import {
 import {
   widthPercentageToDP as wp
 } from 'react-native-responsive-screen';
-import { Style } from '../config/styles';
 import RedButton from '../components/RedButton';
-
+import { Style } from '../config/styles';
+import Lib from '../lib/index';
 const {
-  registerForPushNotificationsAsync,
-  updateNotificationToken
+  fetchElection,
+  processPollingPlace
 } = Lib;
 
 export default class CongratsRegistered extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount = async () => {
+    let { container } = this.props;
+    let { user } = container.state;
+    const election = await fetchElection(2000, user);
+    const pollingPlace = await processPollingPlace(election.pollingLocations);
+    user.pollingPlace = pollingPlace;
+    container.update(user);
+  }
+
 
   onSubmit = async () => {
     this.props.navigation.navigate("VotingPlan");
