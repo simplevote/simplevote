@@ -28,8 +28,9 @@ const styles = StyleSheet.create({
     marginVertical: 20
   },
   pollingPlaceLabel: {
-    fontSize: wp('4.5%'),
-    color: Style.colors.VERY_LIGHT_GRAY,
+    fontSize: wp('3.5%'),
+    fontWeight: 'bold',
+    color: Style.colors.DARKISH_GRAY,
     marginBottom: 5
   },
   pollingPlaceAddressStreet: {

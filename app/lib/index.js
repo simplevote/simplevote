@@ -27,6 +27,7 @@ async function registerForPushNotificationsAsync(user) {
     finalStatus = status;
   }
 
+  console.log('status is', finalStatus)
   // Stop here if the user did not grant permissions
   if (finalStatus !== 'granted') {
     return;
@@ -34,7 +35,6 @@ async function registerForPushNotificationsAsync(user) {
 
   // Get the token that uniquely identifies this device
   const token = await Notifications.getExpoPushTokenAsync();
-
   // POST the token to the server
   const tokenData = {id: user.id, token}
   const res = await putNotificationToken(tokenData)
@@ -42,6 +42,7 @@ async function registerForPushNotificationsAsync(user) {
 
   return { token, tokenResponse }
 }
+
 
 async function getCalendarPermissionsAsync() {
   const { status: existingStatus } = await Permissions.getAsync(

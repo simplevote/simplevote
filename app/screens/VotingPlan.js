@@ -17,6 +17,7 @@ import RedButton from '../components/RedButton';
 import SecurityNotice from '../components/SecurityNotice';
 const {
   getCalendarPermissionsAsync,
+  registerForPushNotificationsAsync,
   searchRepresentatives,
   fetchElections,
   fetchElection,
@@ -58,7 +59,6 @@ export default class VotingPlan extends React.Component {
   }
 
   onOptionSelect = async (calendarId) => {
-    //let { votingTime } = this.props.container.state.user
     let { user } =  this.props.container.state;
     let votingHour = HOUR_MAP[user.votingTime]
     let time = `2019-11-06T${votingHour}:00.000Z`
@@ -70,14 +70,18 @@ export default class VotingPlan extends React.Component {
       notes: "You'll need your id to vote. If you're in line by 6 pm then you can vote"
     }
 
-    const eventId = await Calendar.createEventAsync(calendarId, details)
+    try {
+      const eventId = await Calendar.createEventAsync(calendarId, details)
 
-    if (eventId) {
-      user.isCalendarEventSet = true;
-      user.calendarEventId = eventId;
-      this.props.container.update(user);
-      this.setState({opened: false});
-      alert("Event created!");
+      if (eventId) {
+        user.isCalendarEventSet = true;
+        user.calendarEventId = eventId;
+        this.props.container.update(user);
+        this.setState({opened: false});
+        alert("Event created!");
+      }
+    } catch(err) {
+      alert("Sorry, something went wrong");
     }
   }
 
@@ -111,14 +115,30 @@ export default class VotingPlan extends React.Component {
     }
   }
 
+  enableNotifications = async () => {
+    let { container } = this.props;
+    let { user } = container.state;
+    try {
+      const { token, tokenResponse } = await registerForPushNotificationsAsync(user);
+      user.token = token;
+      user.tokenResponse = tokenResponse
+      user.hasNotificationsEnabled = true;
+      container.update(user)
+    } catch(err) {
+      alert("Sorry, something went wrong")
+    }
+  }
+
   render() {
     const { user } = this.props.container.state
     const disabled = user.isCalendarEventSet ? true : false
     const text = user.isCalendarEventSet
       ? "Calendar invite created"
       : "Create a calendar invite"
-    const menuItems = this.createMenuItems();
-    const { opened } = this.state;
+    const notificationText = user.hasNotificationsEnabled
+      ? "Push notifications enabled"
+      : "Enable push notifications"
+    const notificationsDisabled = user.hasNotificationsEnabled ? true : false
     return (
       <View style={styles.container}>
         <BlueHeader
@@ -135,10 +155,22 @@ export default class VotingPlan extends React.Component {
           text={text}
           onSubmit={this.myCalendar}
           backgroundColor={Style.colors.RED}
+          buttonStyle={{height: Dimensions.get('window').height * .125}}
+          disabledStyle={{backgroundColor: 'rgba(79, 197, 220, .5)'}}
+          textColor={Style.colors.WHITE}
+        />
+        <RedButton
+          navigation={this.props.navigation}
+          disabled={notificationsDisabled}
+          text={notificationText}
+          onSubmit={this.enableNotifications}
+          backgroundColor={Style.colors.RED}
+          buttonStyle={{height: Dimensions.get('window').height * .125}}
+          disabledStyle={{backgroundColor: 'rgba(79, 197, 220, .5)'}}
           textColor={Style.colors.WHITE}
         />
         <Menu
-          opened={opened}
+          opened={this.state.opened}
           renderer={SlideInMenu}
           onBackdropPress={() => this.onBackdropPress()}
           onSelect={value => this.onOptionSelect(value)}>
@@ -146,7 +178,7 @@ export default class VotingPlan extends React.Component {
             onPress={() => this.onTriggerPress()}
             text=''/>
           <MenuOptions customStyles={optionsStyles}>
-            {menuItems}
+            {this.createMenuItems()}
           </MenuOptions>
         </Menu>
       </View>

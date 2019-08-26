@@ -38,7 +38,8 @@ export default class UserContainer extends Container {
       hasBasicInfo: false,
       isEligible: false,
       hasAdditionalInfo: false,
-      isCalendarEventSet: false
+      isCalendarEventSet: false,
+      hasNotificationsEnabled: false
     },
     selections: new Set()
   }
@@ -81,7 +82,7 @@ export default class UserContainer extends Container {
   }
 
   load = async () => {
-    //await Lib.Storage.set('USER', null);
+    // await Lib.Storage.set('USER', null);
     // Load the user
     let user = await Lib.Storage.get('USER');
     if (!user) {
@@ -109,7 +110,8 @@ export default class UserContainer extends Container {
         hasBasicInfo: false,
         isEligible: false,
         hasAdditionalInfo: false,
-        isCalendarEventSet: false
+        isCalendarEventSet: false,
+        hasNotificationsEnabled: false
       }
       await Lib.Storage.set('USER', user);
     }

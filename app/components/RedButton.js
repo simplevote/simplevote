@@ -14,12 +14,14 @@ import { Style } from '../config/styles';
 
 export default class RedButton extends React.Component {
   render() {
+    let extraStyles = {...styles.buttonContainer, ...this.props.buttonStyle}
     return (
-      <View style={styles.buttonContainer}>
+      <View style={extraStyles}>
         <Button
           title={this.props.text}
           disabled={this.props.disabled}
           buttonStyle={[styles.redButtonExtra, Style.buttons.bigRed, {backgroundColor: this.props.backgroundColor}]}
+          disabledStyle={this.props.disabledStyle}
           titleStyle={[Style.buttons.redText, styles.redButtonTextExtra, {color: this.props.textColor}]}
           onPress={this.props.onSubmit}
         />
