@@ -47,12 +47,13 @@ export default class LandingPageScreen extends React.Component {
       ? "VotingPlan"
       : user.isRegistering
         ? user.registrationStep
-        : "Home"
+        : "CheckRegistration"
   }
 
   _cacheResources = async () => {
     const images = [
-      // require('../../assets/blue_large.png'),
+      require('../../assets/tick.png'),
+      require('../../assets/logo.png')
     ];
     const cacheImages = images.map(image => Asset.fromModule(image).downloadAsync());
     return Promise.all(cacheImages)
@@ -62,7 +63,17 @@ export default class LandingPageScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <View style={styles.logo}></View>
+          <View style={styles.logo}>
+            <Image
+              source={require('../../assets/logo.png')}
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: Dimensions.get('window').width * .35,
+                height: Dimensions.get('window').width * .35,
+              }}
+            />
+          </View>
           <Text style={styles.name}>
              <Text>Simple</Text>
              <Text style={styles.highlight}>Vote</Text>
@@ -86,6 +97,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: Dimensions.get('window').width / 2,
     height: Dimensions.get('window').width / 2,
     borderRadius: Dimensions.get('window').width / 4,

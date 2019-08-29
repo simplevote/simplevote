@@ -42,7 +42,15 @@ export default class CongratsRegistered extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <View style={styles.logo}></View>
+          <View style={styles.logo}>
+            <Image
+              source={require('../../assets/tick.png')}
+              style={{
+                width: Dimensions.get('window').width * .3,
+                height: Dimensions.get('window').width * .3,
+              }}
+            />
+          </View>
           <Text style={styles.name}>
              <Text style={{fontWeight: 'bold'}}>Congrats!</Text> You're registered to vote.
           </Text>
@@ -74,6 +82,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: Dimensions.get('window').width / 2,
     height: Dimensions.get('window').width / 2,
     borderRadius: Dimensions.get('window').width / 4,
