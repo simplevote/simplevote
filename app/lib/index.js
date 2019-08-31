@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions'
+import * as Calendar from 'expo-calendar'
 import { Platform } from 'react-native';
 import { v4 as uuid } from 'uuid';
 import moment from 'moment';
@@ -27,7 +28,6 @@ async function registerForPushNotificationsAsync(user) {
     finalStatus = status;
   }
 
-  console.log('status is', finalStatus)
   // Stop here if the user did not grant permissions
   if (finalStatus !== 'granted') {
     return;
@@ -66,6 +66,54 @@ async function getCalendarPermissionsAsync() {
 
   return finalStatus
 }
+
+const HOUR_MAP = {
+  '6:00 am': '06:00',
+  '7:00 am': '07:00',
+  '8:00 am': '08:00',
+  '9:00 am': '09:00',
+  '10:00 am': '10:00',
+  '11:00 am': '11:00',
+  '12:00 pm': '12:00',
+  '1:00 pm': '13:00',
+  '2:00 pm': '14:00',
+  '3:00 pm': '15:00',
+  '4:00 pm': '16:00',
+  '5:00 pm': '17:00',
+  '6:00 pm': '18:00',
+}
+
+/*
+ *
+ */
+async function createCalendarEvent(calendarId, time, user) {
+  const details = {
+    title: "Time to vote!",
+    startDate: time,
+    endDate: '2019-11-05T08:00:00.000Z',
+    location: user.pollingPlace.formattedLocation.formattedAddress,
+    notes: "You'll need your id to vote. If you're in line by 6 pm then you can vote"
+  }
+
+  return Calendar.createEventAsync(calendarId, details)
+}
+
+
+/*
+ *
+ */
+async function updateCalendarEvent(eventId, time, user) {
+  const details = {
+    title: "Time to vote!",
+    startDate: time,
+    endDate: '2019-11-06T05:00:00.000Z',
+    location: user.pollingPlace.formattedLocation.formattedAddress,
+    notes: "You'll need your id to vote. If you're in line by 6 pm then you can vote"
+  }
+
+  return Calendar.updateEventAsync(eventId, details)
+}
+
 
 /*
  *
@@ -1017,6 +1065,8 @@ const Storage = {
 export default {
   registerForPushNotificationsAsync,
   getCalendarPermissionsAsync,
+  createCalendarEvent,
+  updateCalendarEvent,
   findOrCreateUser,
   putNotificationToken,
   updateNotificationToken,
@@ -1053,7 +1103,8 @@ export default {
   updateCandidates,
   updateReferenda,
   Storage,
-  inWords
+  inWords,
+  HOUR_MAP
 };
 
 

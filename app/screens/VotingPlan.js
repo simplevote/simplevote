@@ -17,11 +17,13 @@ import RedButton from '../components/RedButton';
 import SecurityNotice from '../components/SecurityNotice';
 const {
   getCalendarPermissionsAsync,
+  createCalendarEvent,
   registerForPushNotificationsAsync,
   searchRepresentatives,
   fetchElections,
   fetchElection,
-  searchElection
+  searchElection,
+  HOUR_MAP
 } = Lib;
 import Menu, {
   MenuProvider,
@@ -32,21 +34,6 @@ import Menu, {
 import { renderers } from 'react-native-popup-menu';
 const { SlideInMenu } = renderers;
 
-const HOUR_MAP = {
-  '6:00 am': '06:00',
-  '7:00 am': '07:00',
-  '8:00 am': '08:00',
-  '9:00 am': '09:00',
-  '10:00 am': '10:00',
-  '11:00 am': '11:00',
-  '12:00 pm': '12:00',
-  '1:00 pm': '13:00',
-  '2:00 pm': '14:00',
-  '3:00 pm': '15:00',
-  '4:00 pm': '16:00',
-  '5:00 pm': '17:00',
-  '6:00 pm': '18:00',
-}
 
 export default class VotingPlan extends React.Component {
   constructor(props) {
@@ -60,27 +47,31 @@ export default class VotingPlan extends React.Component {
 
   onOptionSelect = async (calendarId) => {
     let { user } =  this.props.container.state;
-    let votingHour = HOUR_MAP[user.votingTime]
-    let time = `2019-11-06T${votingHour}:00.000Z`
-    const details = {
-      title: "Time to vote!",
-      startDate: time,
-      endDate: '2019-11-06T08:00:00.000Z',
-      location: user.pollingPlace.formattedLocation.formattedAddress,
-      notes: "You'll need your id to vote. If you're in line by 6 pm then you can vote"
-    }
+    const votingHour = HOUR_MAP[user.votingTime]
+    const time = `2019-11-05T${votingHour}:00.000Z`
 
-    try {
-      const eventId = await Calendar.createEventAsync(calendarId, details)
-      if (eventId) {
-        user.isCalendarEventSet = true;
-        user.calendarEventId = eventId;
-        this.props.container.update(user);
-        this.setState({opened: false});
-        alert("Event created!");
+    if (!user.isCalendarEventSet) {
+      try {
+        const eventId = await createCalendarEvent(calendarId, time, user);
+        if (eventId) {
+          user.isCalendarEventSet = true;
+          user.calendarEventId = eventId;
+          this.props.container.update(user);
+          this.setState({opened: false});
+          alert("Event created!");
+        }
+      } catch(err) {
+        console.log('err', err);
+        alert("Sorry, something went wrong");
       }
-    } catch(err) {
-      alert("Sorry, something went wrong");
+    } else {
+      const eventId = user.calendarEventId
+      try {
+        const updated = await updateCalendarEvent(eventId, time);
+      } catch(err) {
+        console.log('err', err);
+        alert("Sorry, we couldn't update the event");
+      }
     }
   }
 
@@ -124,6 +115,7 @@ export default class VotingPlan extends React.Component {
       user.hasNotificationsEnabled = true;
       container.update(user)
     } catch(err) {
+      console.log('err', err);
       alert("Sorry, something went wrong")
     }
   }
@@ -138,6 +130,7 @@ export default class VotingPlan extends React.Component {
       ? "Push notifications enabled"
       : "Enable push notifications"
     const notificationsDisabled = user.hasNotificationsEnabled ? true : false
+
     return (
       <View style={styles.container}>
         <BlueHeader

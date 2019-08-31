@@ -12,6 +12,11 @@ import {
   widthPercentageToDP as wp
 } from 'react-native-responsive-screen';
 var FloatingLabel = require('react-native-floating-labels');
+import Lib from '../lib/index'
+const {
+  updateCalendarEvent,
+  HOUR_MAP
+} = Lib;
 
 const timeOptions = [{
     value: '6:00 am'
@@ -45,8 +50,18 @@ export default class VotingPlanForm extends React.Component {
   handleTime = async (value) => {
     let { container } = this.props;
     let { user } = container.state;
-    // TODO: Update calendar event
     user.votingTime = value;
+
+    if (user.isCalendarEventSet) {
+      const votingHour = HOUR_MAP[user.votingTime]
+      const time = `2019-11-05T${votingHour}:00.000Z`
+      const eventId = user.calendarEventId
+      try {
+        await updateCalendarEvent(eventId, time, user);
+      } catch(err) {
+        console.log('update err', err);
+      }
+    }
     container.update(user);
   }
 
