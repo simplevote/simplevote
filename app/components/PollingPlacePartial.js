@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   pollingPlaceAddressStreet: {
-    fontSize: wp('6%')
+    fontSize: wp('5.5%')
   }
 });

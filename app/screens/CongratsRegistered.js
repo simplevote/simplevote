@@ -33,7 +33,6 @@ export default class CongratsRegistered extends React.Component {
     container.update(user);
   }
 
-
   onSubmit = async () => {
     this.props.navigation.navigate("VotingPlan");
   }

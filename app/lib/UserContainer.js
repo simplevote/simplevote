@@ -82,7 +82,7 @@ export default class UserContainer extends Container {
   }
 
   load = async () => {
-    await Lib.Storage.set('USER', null);
+    //await Lib.Storage.set('USER', null);
     // Load the user
     let user = await Lib.Storage.get('USER');
     if (!user) {

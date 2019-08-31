@@ -78,9 +78,9 @@ export default class VotingPlanForm extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 10,
+    paddingVertical: 5,
     flexDirection: 'column',
-    height: Dimensions.get('window').height * .5,
+    height: Dimensions.get('window').height * .525,
     justifyContent: 'space-between',
     alignItems: 'center'
   },

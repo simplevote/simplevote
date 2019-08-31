@@ -10,7 +10,7 @@ import * as Permissions from 'expo-permissions'
 import * as Calendar from 'expo-calendar'
 import { Style } from '../config/styles';
 import Lib from '../lib/index'
-import BlueHeader from '../components/BlueHeader';
+import BlueHeader from '../components/BlueHeaderElection';
 import VotingPlanForm from '../components/VotingPlanForm';
 import PollingPlace from '../components/PollingPlacePartial';
 import RedButton from '../components/RedButton';
@@ -72,7 +72,6 @@ export default class VotingPlan extends React.Component {
 
     try {
       const eventId = await Calendar.createEventAsync(calendarId, details)
-
       if (eventId) {
         user.isCalendarEventSet = true;
         user.calendarEventId = eventId;
@@ -144,6 +143,7 @@ export default class VotingPlan extends React.Component {
         <BlueHeader
           additionalStyle={{fontWeight: 'bold'}}
           text={"My voting plan"}
+          text2={"NOV 5TH KENTUCKY GENERAL ELECTION"}
         />
         <VotingPlanForm
           container={this.props.container}
